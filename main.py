@@ -2,10 +2,12 @@ import streamlit as st
 import google.generativeai as genai
 import pdfplumber
 import docx
+from dotenv import load_env
 
-# 🔹 Configure Google Gemini API
-API_KEY = "AIzaSyCL_ZmlWvNFud0kvYgeXtwygtvd1Gc7f0E"  # Replace with your actual API Key
-genai.configure(api_key=API_KEY)
+load_env() # Save api key in .env as GOOGLE_API_KEY
+
+# 🔹 Configure Google Gemini API  # Replace with your actual API Key
+genai.configure()
 
 MODEL_NAME = "gemini-2.0-flash"  # Free-tier Gemini model
 model = genai.GenerativeModel(MODEL_NAME)
@@ -101,5 +103,6 @@ if st.button("🔎 Analyze Resumes"):
 
     else:
         st.error("❌ Please enter a job description and upload at least one resume.")
+
 
 # Run this using: `streamlit run resume_matcher.py`
